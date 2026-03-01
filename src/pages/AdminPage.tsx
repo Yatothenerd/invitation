@@ -3,9 +3,10 @@ import AdminGuestList from '../components/AdminGuestList';
 import { encodeGuestName } from '../utils/guestCode';
 import type { Guest } from '../types';
 
-const getName = (g: Guest) => (g as any).Name || (g as any).name || String(Object.values(g)[0] || '');
+const getName = (g: Guest) =>
+  (g as any).Name || (g as any).name || String(Object.values(g)[0] || '');
 
-export default function AdminPage(): JSX.Element {
+export default function AdminPage() {
   const [guests, setGuests] = useState<Guest[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -25,7 +26,9 @@ export default function AdminPage(): JSX.Element {
       }
     }
     load();
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const handleSelect = (guest: Guest) => {
