@@ -4,11 +4,17 @@ import * as XLSX from 'xlsx';
 
 export default async function handler(req, res) {
   try {
-    // Use your deployed domain or relative path
-    const response = await fetch(`${process.env.VERCEL_URL}/WeddingGuest.xlsx`);
-    const buffer = await response.arrayBuffer();
+    // Use your deployed domain in production, localhost in dev oh yeah
+    const baseUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000';
 
-    // Parse the Excel file from buffer
+    const response = await fetch(`${baseUrl}/WeddingGuest.xlsx`);
+    if (!response.ok) {
+      return res.status(404).json({ error: 'WeddingGuest.xlsx not found' });
+    }
+
+    const buffer = await response.arrayBuffer();
     const workbook = XLSX.read(buffer, { type: 'buffer' });
     const sheetName = workbook.SheetNames[0];
     const sheet = workbook.Sheets[sheetName];
