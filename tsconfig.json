@@ -23,9 +23,6 @@
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-   "compilerOptions": {
-    "jsx": "react-jsx",
-    "types": ["react"]
-  }
+  "types": ["react"]
 
 }
