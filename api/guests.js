@@ -1,10 +1,6 @@
-import path from 'path';
-import fs from 'fs';
-import * as XLSX from 'xlsx';
+const XLSX = require('xlsx');
 
-import * as XLSX from 'xlsx';
-
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   try {
     // Build base URL depending on environment
     const baseUrl = process.env.VERCEL_URL
@@ -33,4 +29,4 @@ export default async function handler(req, res) {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-}
+};
